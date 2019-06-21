@@ -1,27 +1,38 @@
 <template>
   <div id="app">
-    <header>
-      Todo List
-    </header>
+    <header>Todo List</header>
     <section class="input">
-      <input type="text" name="" id="">
-      <input type="button" value="제출">
+      <!-- 1. v-model -->
+      <!-- 2. v-on -->
+      <input type="text" name id v-model="value" @keyup.enter="addItem">
+      <button @click="addItem">제출</button>
     </section>
     <section>
       <ol>
-        <li>
-          리스트
-        </li>
+        <!-- 3. v-for, v-bind:key -->
+        <li v-for="(item,index) in list" :key="index">{{item}}</li>
       </ol>
     </section>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'app'
-}
+  name: "app",
+  data() {
+    return {
+      // 4. Vue data
+      value: "",
+      list: []
+    };
+  },
+  // 5. methods
+  methods: {
+    addItem() {
+      this.list.push(this.value);
+    }
+  }
+};
 </script>
 
 <style>
