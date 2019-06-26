@@ -1,29 +1,11 @@
-# clone_instagram
+# todo list
 
-## Project setup
-```
-npm install
-```
+## 장고 + vue.js 강의자료 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+설명은 이거 참고  
+https://gtah2yk.gitbook.io/vuestagram-clone-coding/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+강의별로 브런치로 나누긴 했는데 아직 제대로 나누지 않았으니깐.  
+대충보셈.
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
