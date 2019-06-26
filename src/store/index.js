@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+
+const API = 'http://127.0.0.1:8000/api/'
 
 export default new Vuex.Store({
   state: {
@@ -16,20 +19,46 @@ export default new Vuex.Store({
     asynSetList({
       commit
     }) {
-      let list = JSON.parse(localStorage.getItem("todoList") || "[]");
-      console.log('asynSetList' + list)
-      commit('setList', list)
+      // let list = JSON.parse(localStorage.getItem("todoList") || "[]");
+      axios.get(API + 'todos/')
+        .then(
+          (response) => {
+            console.log(response)
+            commit('setList', response.data)
+          }
+        ).catch(
+          (err) => {
+            console.log(err);
+          }
+        )
+    },
+    asyncPushList({
+      commit,
+      dispatch
+    }, payload) {
+      axios.post(API + 'todos/', payload)
+        .then(res => {
+          console.log(res)
+          // commit('pushList', res.data)
+          dispatch("asynSetList");
+        })
+        .catch(err => console.log(err))
+    },
+    asyncSpliceItem({
+      commit,
+      dispatch
+    }, payload) {
+      axios.delete(`${API}todos/${payload}/`)
+        .then((res) => {
+          console.log(res)
+          dispatch("asynSetList");
+        })
+        .catch(err => console.log(err))
     }
   },
   mutations: {
     setList(state, payload) {
       state.list = payload
-    },
-    pushList(state, payload) {
-      state.list.push(payload);
-    },
-    spliceItem(state, payload) {
-      state.list.splice(payload, 1);
     }
   }
 })

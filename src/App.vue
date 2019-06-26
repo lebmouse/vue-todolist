@@ -10,6 +10,7 @@
 import Header from "./components/Header.vue";
 import InputBar from "./components/InputBar.vue";
 import List from "./components/List.vue";
+import axios from "axios";
 
 export default {
   name: "app",
@@ -20,12 +21,6 @@ export default {
   },
   created() {
     this.$store.dispatch("asynSetList");
-  },
-  mounted() {
-    this.$store.watch(
-      () => this.$store.getters.getList,
-      todos => localStorage.setItem("todoList", JSON.stringify(todos))
-    );
   }
 };
 </script>

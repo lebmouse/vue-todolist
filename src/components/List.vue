@@ -7,11 +7,11 @@
           ref="item"
           readonly
           type="text"
-          @keyup.enter="modifyItem(index)"
-          :value="item"
+          @keyup.enter="modifyItem(item.id)"
+          :value="item.body"
         >
-        <!-- <button ref="modifyBtn" @click="modifyItem(index)">수정</button> -->
-        <button @click="removeItem(index)">제거</button>
+        <!-- <button ref="modifyBtn" @click="modifyItem(item.id)">수정</button> -->
+        <button @click="removeItem(item.id)">제거</button>
       </li>
     </ul>
   </section>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     removeItem(index) {
-      this.$store.commit("spliceItem", index);
+      this.$store.dispatch("asyncSpliceItem", index);
     },
     modifyItem(index) {
       let prev = this.prevModifiedItem;
